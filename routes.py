@@ -141,6 +141,18 @@ def register():
                 k3.next()
             print('k3: ',k3.seq)
 
+            #calcul S = ( K1⋀(¬K2) ⊕ (K2⋀K3)
+            s = []
+            k1.info()
+            #print(k1.getFullPeriod())
+            for x in range(256):
+              s.append(( k1.seq[x] and not(k2.seq[x]))^(k2.seq[x] and k3.seq[x])  )
+
+            print("s:", s)
+            print("s:", len(s))
+
+
+
             newuser = User(
                 username=username,
                 email=email,
