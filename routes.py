@@ -116,15 +116,16 @@ def register():
                 len3_tab.append(int(digits))
             print(len3_tab)
             
+            # calcul k1
             fpoly = [20,2]
-            L = LFSR(initstate=len1_tab,fpoly=fpoly,counter_start_zero=False)
+            k1 = LFSR(initstate=len1_tab,fpoly=fpoly,counter_start_zero=False)
             #print('count \t state \t\toutbit \t seq')
             #print('-'*50)
             for _ in range(256):
                 #print(L.count,L.state,'',L.outbit,L.seq,sep='\t')
-                L.next()
+                k1.next()
             #print('-'*50)
-            print('k1: ',L.seq)
+            print('k1: ',k1.seq)
 
             # calcul k2
             fpoly = [21,2]
