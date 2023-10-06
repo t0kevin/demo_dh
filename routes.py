@@ -86,8 +86,14 @@ def register():
             pwd = form.pwd.data
             username = form.username.data
             ascii_val = ""
+            
             for character in pwd:
                 ascii_val = ascii_val + str(format((ord(character)), '08b'))
+            len1 = ascii_val[:20]
+            len2 = ascii_val[20:41]
+            len3 = ascii_val[41:]
+
+            print(len3)
             newuser = User(
                 username=username,
                 email=email,
