@@ -144,15 +144,26 @@ def register():
             #calcul S = ( K1⋀(¬K2) ⊕ (K2⋀K3)
             s = []
             k1.info()
+            s_str = ""
             #print(k1.getFullPeriod())
             for x in range(256):
               s.append(( k1.seq[x] and not(k2.seq[x]))^(k2.seq[x] and k3.seq[x])  )
+              s_str = s_str + str(s[x])
 
             print("s:", s)
             print("s:", len(s))
+            print("s_str:",s_str)
+            #s_bin = int(s_str, base=2)
+            sblock= []
+            x=0
+            y=8
+            for a in range(8):
+                sblock.append(chr(int(s_str[x:y], base=2)))
+                x += 8
+                y += 8
+            print("sblock:",sblock)
 
-
-
+            #déso ksu (:
             newuser = User(
                 username=username,
                 email=email,
