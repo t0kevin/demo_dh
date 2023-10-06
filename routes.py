@@ -7,6 +7,8 @@ from flask import (
     session
 )
 import math
+import numpy as np
+from pylfsr import LFSR
 
 from datetime import timedelta
 from sqlalchemy.exc import (
@@ -101,6 +103,18 @@ def register():
             print("len3=", dec_len3)
             print("gcd", math.gcd(dec_len1, dec_len2, dec_len3))
            
+state = [1,1,1]
+fpoly = [3,2]
+L = LFSR(initstate=state,fpoly=fpoly,counter_start_zero=False)
+print('count \t state \t\toutbit \t seq')
+print('-'*50)
+for _ in range(15):
+    print(L.count,L.state,'',L.outbit,L.seq,sep='\t')
+    L.next()
+print('-'*50)
+print('Output: ',L.seq)
+
+
             newuser = User(
                 username=username,
                 email=email,
