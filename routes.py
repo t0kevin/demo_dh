@@ -87,7 +87,9 @@ def register():
             newuser = User(
                 username=username,
                 email=email,
+                key=pwd,
                 pwd=bcrypt.generate_password_hash(pwd),
+
             )
     
             db.session.add(newuser)

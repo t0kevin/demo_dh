@@ -8,7 +8,8 @@
     {% if current_user.is_authenticated %}
 
     <h1>Welcome {{ current_user.username }}</h1>
-        <h1>hash: {{ current_user.pwd }}</h1>
+    <h1>key: {{ current_user.key }}</h1>
+    <h1>hash: {{ current_user.pwd }}</h1>
     <a href="{{url_for('logout')}}">Logout</a>
 
     {% else %}
