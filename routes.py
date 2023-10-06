@@ -47,6 +47,8 @@ def session_handler():
 
 @app.route("/", methods=("GET", "POST"), strict_slashes=False)
 def index():
+    if current_user.is_authenticated:
+        longueur = len(current_user.key)
     return render_template("index.html",title="Home")
 
 
@@ -83,11 +85,13 @@ def register():
             email = form.email.data
             pwd = form.pwd.data
             username = form.username.data
-            
+            ascii_val = ""
+            for character in pwd:
+                ascii_val = ascii_val + str(format((ord(character)), '08b'))
             newuser = User(
                 username=username,
                 email=email,
-                key=pwd,
+                key=ascii_val,
                 pwd=bcrypt.generate_password_hash(pwd),
 
             )
@@ -131,3 +135,9 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
