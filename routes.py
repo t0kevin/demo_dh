@@ -6,6 +6,7 @@ from flask import (
     url_for,
     session
 )
+import math
 
 from datetime import timedelta
 from sqlalchemy.exc import (
@@ -90,10 +91,16 @@ def register():
             for character in pwd:
                 ascii_val = ascii_val + str(format((ord(character)), '08b'))
             len1 = ascii_val[:20]
+            dec_len1 = int(ascii_val[:20], base=2)
+            print("len1=", dec_len1)
             len2 = ascii_val[20:41]
+            dec_len2 = int(ascii_val[20:41], base=2)
+            print("len2=", dec_len2)
             len3 = ascii_val[41:]
-
-            print(len3)
+            dec_len3 = int(ascii_val[41:], base=2)
+            print("len3=", dec_len3)
+            print("gcd", math.gcd(dec_len1, dec_len2, dec_len3))
+           
             newuser = User(
                 username=username,
                 email=email,
