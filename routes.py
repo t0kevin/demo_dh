@@ -103,17 +103,42 @@ def register():
             print("len3=", dec_len3)
             print("gcd", math.gcd(dec_len1, dec_len2, dec_len3))
            
-state = [1,1,1]
-fpoly = [3,2]
-L = LFSR(initstate=state,fpoly=fpoly,counter_start_zero=False)
-print('count \t state \t\toutbit \t seq')
-print('-'*50)
-for _ in range(15):
-    print(L.count,L.state,'',L.outbit,L.seq,sep='\t')
-    L.next()
-print('-'*50)
-print('Output: ',L.seq)
+            len1_tab = []
+            for digits in len1:
+                len1_tab.append(int(digits))
+            print(len1_tab)
+            len2_tab = []
+            for digits in len2:
+                len2_tab.append(int(digits))
+            print(len2_tab)
+            len3_tab = []
+            for digits in len3:
+                len3_tab.append(int(digits))
+            print(len3_tab)
+            
+            fpoly = [20,2]
+            L = LFSR(initstate=len1_tab,fpoly=fpoly,counter_start_zero=False)
+            #print('count \t state \t\toutbit \t seq')
+            #print('-'*50)
+            for _ in range(256):
+                #print(L.count,L.state,'',L.outbit,L.seq,sep='\t')
+                L.next()
+            #print('-'*50)
+            print('k1: ',L.seq)
 
+            # calcul k2
+            fpoly = [21,2]
+            k2 = LFSR(initstate=len2_tab,fpoly=fpoly,counter_start_zero=False)
+            for _ in range(256):
+                k2.next()
+            print('k2: ',k2.seq)
+
+            # calcul k3
+            fpoly = [23,2]
+            k3 = LFSR(initstate=len3_tab,fpoly=fpoly,counter_start_zero=False)
+            for _ in range(256):
+                k3.next()
+            print('k3: ',k3.seq)
 
             newuser = User(
                 username=username,
