@@ -155,19 +155,22 @@ def register():
             print("s_str:",s_str)
             #s_bin = int(s_str, base=2)
             sblock= []
+            prk1 =""
             x=0
             y=8
             for a in range(8):
                 sblock.append(chr(int(s_str[x:y], base=2)))
                 x += 8
                 y += 8
-            print("sblock:",sblock)
-
+                prk1 = prk1 + sblock[a]
+            print("sblock:",prk1)
+            
             #déso ksu (:
+
             newuser = User(
                 username=username,
                 email=email,
-                key=ascii_val,
+                key=prk1,
                 pwd=bcrypt.generate_password_hash(pwd),
 
             )
